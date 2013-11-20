@@ -25,12 +25,12 @@ public class Lexer {
 		SEMICOLON(";"), 
 		EOF;
 		
-		private Object symbol; // поле класса Object
+		private Object symbol; 
 
 		private Token() {} 
 		
-		private Token(String symbol) { //перегружаем конструктор, значение аргумента сохраняется
-                    // в поле symbol
+		private Token(String symbol) { //перегружаем конструктор
+            
 			this.symbol = symbol;
 		}
 		
@@ -82,7 +82,7 @@ public class Lexer {
 			else if (StringUtils.isNumeric(ch)) { // если в позиции число
 				int val = Integer.parseInt(ch); // разбор аргумента как целого
 				
-				while((ch = topChar()) != null && StringUtils.isNumeric(ch)) {
+				while((ch = topChar()) != null && StringUtils.isNumeric(ch)) { 
 					val = val * 10 + Integer.parseInt(popChar());
 				}
 				
@@ -95,7 +95,7 @@ public class Lexer {
 					ident += popChar(); // конкатенация с уже имеющимся значением и постфиксный инкремент
 				}
 				
-				if ((token = Token.fromValue(ident)) != null) return token; //если есть в соответствии токен-возвращаем
+				if ((token = Token.fromValue(ident)) != null) return token; 
 				else if (ident.length() == 1) return Token.ID.setSymbol(ident);
 				else {
 					throw new RuntimeException("Unknown identifier: " + ident); // в противном случае выбрасываем ошибку
@@ -119,8 +119,7 @@ public class Lexer {
 	}
 	
 	private String popChar() {
-		return pos < string.length() ? String.valueOf(string.charAt(pos++)) : null; // получаем символ в pos до
-                // инкремента, далее см.выше
+		return pos < string.length() ? String.valueOf(string.charAt(pos++)) : null; // то же то с постфиксным инкрементом
 	}
 	
 	public static void main(String[] args) { // для проверки работоспособности
